@@ -1,7 +1,7 @@
 [project]
 name = "backend-fastapi"
 version = "0.1.0"
-description = "Add your description here"
+description = "using a mini DBMS project for learning fastapi + postgres and some other frameworks"
 readme = "README.md"
 requires-python = ">=3.10.12"
 dependencies = [
