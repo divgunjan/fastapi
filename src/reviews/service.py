@@ -43,11 +43,10 @@ class ReviewService:
             )
             review_data_dict = review_data.model_dump()
             new_review = Review(**review_data_dict)
-            new_review.user = user
-            new_review.book = book
             session.add(new_review)
             await session.commit()
-            return new_review
+            new_review.book = book
+            new_review.user = user
 
             if not book:
                 raise HTTPException(
@@ -61,6 +60,7 @@ class ReviewService:
                     detail="User not found."
                 )
 
+            return new_review
 
         except Exception as e:
             raise HTTPException(
