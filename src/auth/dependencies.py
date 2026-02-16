@@ -6,6 +6,7 @@ from fastapi.exceptions import HTTPException
 from src.db.redis import token_in_blocklist
 from db.main import get_session
 from sqlmodel.ext.asyncio.session import AsyncSession
+from .service import UserService
 
 class TokenBearer(HTTPBearer):
     def __init__(self, auto_error=True):
@@ -68,6 +69,7 @@ async def get_current_user(
         token_details:dict = Depends(AccessTokenBearer()),
         session:AsyncSession = Depends(get_session)):
             user_email = token_details['user']['email']
+            user_service=UserService()
             user=await user_service.get_user_by_email(user_email,session)
             return user
 
