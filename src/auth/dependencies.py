@@ -8,7 +8,8 @@ from src.db.main import get_session
 from sqlmodel.ext.asyncio.session import AsyncSession
 from .service import UserService
 from src.errors import InvalidToken, RefreshTokenRequired, AccessTokenRequired
-from typing import List
+
+from typing import List, Any
 from src.auth.models import User
 
 class TokenBearer(HTTPBearer):
@@ -70,7 +71,7 @@ class RoleChecker(TokenBearer):
     def __init__(self, allowed_roles:List[str])->None:
         self.allowed_roles = allowed_roles
 
-    def __init_subclass__(self, current_user:User = Depends(get_current_user))->any:
+    def __init_subclass__(self, current_user:User = Depends(get_current_user))->Any:
         if get_current_user.role in self.allowed_roles:
             return True
 

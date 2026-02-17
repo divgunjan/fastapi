@@ -8,6 +8,8 @@ from .service import BookService, UserService
 from .schemas import ReviewCreateModel
 import logging 
 
+from src.errors import UserNotFound
+
 book_service=BookService()
 user_service=UserService()
 
@@ -56,10 +58,7 @@ class ReviewService:
                 )
             
             if not user:
-                raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND,
-                    detail="User not found."
-                )
+                raise UserNotFound()
 
             return new_review
 
