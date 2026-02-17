@@ -6,6 +6,7 @@ from fastapi.exceptions import HTTPException
 from fastapi import status
 from .service import BookService, UserService
 from .schemas import ReviewCreateModel
+import logging 
 
 book_service=BookService()
 user_service=UserService()
@@ -63,6 +64,7 @@ class ReviewService:
             return new_review
 
         except Exception as e:
+            logging.exception(e)
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="Oops... Something went wrong"

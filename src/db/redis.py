@@ -9,7 +9,7 @@ token_blocklist = aioredis.StrictRedis(
     db=0
 )
 
-async def add_jti_to_blocklis(jti:str)->None:
+async def add_jti_to_blocklist(jti:str)->None:
     await token_blocklist.set(
         #key and value
         name=jti,

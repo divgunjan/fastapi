@@ -12,6 +12,8 @@ import datetime
 from src.db.redis import add_jti_to_blocklist
 from typing import List
 
+from src.errors import InvalidCredentials, UserAlreadyExists 
+
 auth_router = APIRouter()
 user_service = UserService()
 
@@ -26,7 +28,7 @@ async def create_user_account(
     user_exists = await user_service.user_exists(email, session=session)
   
     if user_exists:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail = "user already exists")
+        raise UserAlreadyExists()
     
     new_user = await user_service.create_user(user_data=user_data, email=email, session=session) 
 

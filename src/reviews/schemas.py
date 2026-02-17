@@ -2,9 +2,8 @@ from pydantic import BaseModel, Field
 from sqlmodel import Relationship
 from fastapi.exceptions import HTTPException
 from fastapi import status
-from .schemas import ReviewCreateModel
 from datetime import datetime
-from sqlmodel.ext.asyncio import AsyncSession
+# from sqlmodel.ext.asyncio import AsyncSession
 from typing import Optional
 import uuid
 
